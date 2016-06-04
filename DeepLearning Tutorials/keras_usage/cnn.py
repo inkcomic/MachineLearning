@@ -82,14 +82,15 @@ model.add(Activation('softmax'))
 ##############
 #使用SGD + momentum
 #model.compile里的参数loss就是损失函数(目标函数)
-sgd = SGD(l2=0.0,lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd,class_mode="categorical")
+sgd = SGD(#/*l2=0.0,*/
+lr=0.05, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 
 
 #调用fit方法，就是一个训练过程. 训练的epoch数设为10，batch_size为100．
 #数据经过随机打乱shuffle=True。verbose=1，训练过程中输出的信息，0、1、2三种方式都可以，无关紧要。show_accuracy=True，训练时每一个epoch都输出accuracy。
 #validation_split=0.2，将20%的数据作为验证集。
-model.fit(data, label, batch_size=100, nb_epoch=10,shuffle=True,verbose=1,show_accuracy=True,validation_split=0.2)
+model.fit(data, label, batch_size=100, nb_epoch=10,shuffle=True,verbose=1,validation_split=0.2)
 
 
 """
